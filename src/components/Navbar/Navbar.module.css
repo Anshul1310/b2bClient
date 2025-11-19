@@ -1,0 +1,151 @@
+.topBar {
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.topBarContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.topBarItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+
+.header {
+  background: white;
+  padding: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.headerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0D6EFD;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.searchBar {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: 12px 20px 12px 45px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: #0D6EFD;
+}
+
+.searchBar::before {
+  content: "🔍";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.headerBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 500;
+}
+
+.cartBadge {
+  background: #0D6EFD;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nav {
+  background: white;
+  border-top: 1px solid #e5e5e5;
+  padding: 15px 0;
+}
+
+.navContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+}
+
+.navItem {
+  padding: 8px 20px;
+  background: none;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.navItem:hover {
+  background: #f0f0f0;
+}
+
+.active {
+  background: #0D6EFD;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .headerContent { flex-wrap: wrap; }
+  .searchBar { order: 3; max-width: 100%; flex-basis: 100%; }
+}

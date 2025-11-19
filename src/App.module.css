@@ -1,0 +1,56 @@
+/* --- Global Variables --- */
+:root {
+  --primary-color: #0D6EFD;
+  --secondary-color: #0891b2;
+  --text-color: #1a1a1a;
+  --light-gray: #f8f9fa;
+  --border-color: #e5e5e5;
+  --success-color: #22c55e;
+  --yellow-brand: #ffd60a;
+  --orange-brand: #ff6b35;
+  --blue-brand: #0077b6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-color);
+  background: var(--light-gray);
+}
+
+/* --- Top Bar Styles --- */
+.top-bar {
+  background: white;
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.top-bar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.top-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .top-bar-content {
+    font-size: 12px;
+  }
+}

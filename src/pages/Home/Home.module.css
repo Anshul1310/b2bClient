@@ -1,0 +1,123 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Hero Section */
+.heroSlider {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+  border-radius: 16px;
+  padding: 60px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+.heroContent {
+  max-width: 50%;
+  z-index: 2;
+  position: relative;
+}
+
+.heroLabel { font-size: 14px; opacity: 0.9; margin-bottom: 10px; }
+.heroTitle { font-size: 48px; font-weight: 800; margin-bottom: 15px; line-height: 1.2; }
+.heroSubtitle { font-size: 24px; margin-bottom: 20px; opacity: 0.95; }
+
+.heroImage {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 350px;
+  height: 350px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+}
+
+.sliderDots { display: flex; gap: 8px; margin-top: 30px; }
+.dot {
+  width: 40px; height: 4px; background: rgba(255,255,255,0.3);
+  border-radius: 2px; cursor: pointer; transition: all 0.3s;
+}
+.dotActive { background: white; }
+
+/* Section Headers */
+.sectionHeader {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
+}
+.sectionTitle { font-size: 24px; font-weight: 700; color: #1a1a1a; }
+.sectionTitle span { color: #0D6EFD; }
+.viewAll { color: #0D6EFD; text-decoration: none; font-weight: 600; }
+
+/* Products Scroll */
+.productsScroll {
+  display: flex; gap: 20px; overflow-x: auto; padding-bottom: 15px;
+  scroll-behavior: smooth; cursor: grab;
+}
+.productsScroll:active { cursor: grabbing; }
+.productsScroll::-webkit-scrollbar { height: 6px; }
+.productsScroll::-webkit-scrollbar-thumb { background: #0D6EFD; border-radius: 10px; }
+
+/* Cards */
+.productCard, .categoryCard, .essentialCard {
+  background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s; cursor: pointer; position: relative;
+}
+.productCard:hover, .categoryCard:hover, .essentialCard:hover {
+  transform: translateY(-5px);
+}
+
+.productCard { padding: 15px; min-width: 220px; }
+.discountBadge {
+  position: absolute; top: 15px; left: 15px; background: #0D6EFD;
+  color: white; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: 700;
+}
+.productImage {
+  width: 100%; height: 180px; background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 60px; margin-bottom: 15px;
+}
+
+/* Grids */
+.categoryGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 20px; margin-bottom: 50px;
+}
+.categoryCard { padding: 25px; text-align: center; }
+.categoryIcon { font-size: 50px; margin-bottom: 15px; }
+
+.brandsGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 50px;
+}
+.brandCard {
+  background: #1a1a1a; border-radius: 12px; padding: 40px; color: white; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.3s;
+}
+.brandCard:hover { transform: scale(1.03); }
+.brandCard.yellow { background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%); color: #1a1a1a; }
+.brandCard.orange { background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%); }
+.brandCard.blue { background: linear-gradient(135deg, #0077b6 0%, #023e8a 100%); }
+
+.essentialsGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 50px;
+}
+.essentialCard { padding: 20px; text-align: center; }
+.essentialImage {
+  width: 100%; height: 140px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 50px; margin-bottom: 15px;
+}
+
+/* Notification */
+.notification {
+  position: fixed; top: 100px; right: 20px; background: #22c55e; color: white;
+  padding: 15px 25px; border-radius: 8px; font-weight: 600; z-index: 10000;
+  animation: slideIn 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .heroSlider { padding: 40px 30px; }
+  .heroTitle { font-size: 28px; }
+  .heroImage { opacity: 0.2; right: 20px; }
+}
