@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Home.module.css';
-import Navbar from '../../components/Navbar/Navbar.js';
-import Footer from '../../components/Footer/Footer.js';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+
+
 
 const Home = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -9,22 +11,22 @@ const Home = () => {
   const [showNotification, setShowNotification] = useState(false);
   const scrollRef = useRef(null);
 
-  // Data for Hero Slider
+  // Data for Hero Slider (Images only - Banner style)
   const heroContents = [
-    { label: 'Best Deal Online on smart watches', title: 'SMART WEARABLE.', subtitle: 'UP to 80% OFF', icon: '⌚' },
-    { label: 'Top deals on smartphones', title: 'MOBILE SALE.', subtitle: 'UP to 50% OFF', icon: '📱' },
-    { label: 'Latest laptops & tablets', title: 'TECH ESSENTIALS.', subtitle: 'UP to 40% OFF', icon: '💻' },
-    { label: 'Premium audio collection', title: 'SOUND GEAR.', subtitle: 'UP to 60% OFF', icon: '🎧' },
-    { label: 'Smart home devices', title: 'HOME AUTOMATION.', subtitle: 'UP to 45% OFF', icon: '🏠' }
+    'https://images.unsplash.com/photo-1556656793-02774a8316ea?auto=format&fit=crop&w=1600&q=80', // Shopping/Apparel
+    'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1600&q=80', // Tech/Electronics
+    'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80', // E-commerce boxes
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80', // Fashion/Mall
   ];
 
   // Data for Products
   const products = [
-    { name: 'Galaxy S22 Ultra', price: '32999', original: '74999', save: '32999', discount: '32%', icon: '📱' },
-    { name: 'Galaxy M13', price: '10499', original: '14999', save: '4500', discount: '36%', icon: '📱' },
-    { name: 'Galaxy M33', price: '16999', original: '24999', save: '8000', discount: '34%', icon: '📱' },
-    { name: 'Galaxy M53', price: '31999', original: '40999', save: '9000', discount: '17%', icon: '📱' },
-    { name: 'Galaxy S22', price: '47999', original: '69999', save: '18000', discount: '32%', icon: '📱' },
+    { name: 'Samsung Galaxy S22 Ultra', price: '32,999', original: '74,999', save: '42,000', discount: '56%', icon: '📱' },
+    { name: 'Apple iPhone 14 Pro', price: '99,999', original: '1,29,999', save: '30,000', discount: '23%', icon: '📱' },
+    { name: 'Xiaomi Redmi Note 12', price: '12,499', original: '17,999', save: '5,500', discount: '30%', icon: '📱' },
+    { name: 'OnePlus 11 5G', price: '54,999', original: '69,999', save: '15,000', discount: '21%', icon: '📱' },
+    { name: 'Google Pixel 7a', price: '37,999', original: '43,999', save: '6,000', discount: '14%', icon: '📱' },
+    { name: 'Sony WH-1000XM5', price: '26,990', original: '34,990', save: '8,000', discount: '22%', icon: '🎧' },
   ];
 
   // Auto Rotate Slider
@@ -33,7 +35,7 @@ const Home = () => {
       setCurrentSlide((prev) => (prev + 1) % heroContents.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroContents.length]);
 
   // Drag to Scroll Logic
   useEffect(() => {
@@ -48,6 +50,7 @@ const Home = () => {
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     };
+
     const onMouseLeave = () => { isDown = false; slider.style.cursor = 'grab'; };
     const onMouseUp = () => { isDown = false; slider.style.cursor = 'grab'; };
     const onMouseMove = (e) => {
@@ -81,37 +84,35 @@ const Home = () => {
     setTimeout(() => setShowNotification(false), 2000);
   };
 
-  const hero = heroContents[currentSlide];
-
   return (
     <>
       <Navbar cartCount={cartCount} />
       
-      {showNotification && <div className={styles.notification}>Added to cart!</div>}
+      {showNotification && <div className={styles.notification}>Item added to cart!</div>}
 
       <div className={styles.container}>
-        {/* Hero Section */}
+        {/* Hero Slider (Image Only + Black Tint) */}
         <div className={styles.heroSlider}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroLabel}>{hero.label}</div>
-            <div className={styles.heroTitle}>{hero.title}</div>
-            <div className={styles.heroSubtitle}>{hero.subtitle}</div>
-            <div className={styles.sliderDots}>
-              {heroContents.map((_, idx) => (
-                <div 
-                  key={idx} 
-                  className={`${styles.dot} ${idx === currentSlide ? styles.dotActive : ''}`}
-                  onClick={() => setCurrentSlide(idx)}
-                ></div>
-              ))}
-            </div>
+          <img 
+            src={heroContents[currentSlide]} 
+            alt="Special Offer" 
+            className={styles.heroImg}
+          />
+          
+          <div className={styles.sliderDots}>
+            {heroContents.map((_, idx) => (
+              <div 
+                key={idx} 
+                className={`${styles.dot} ${idx === currentSlide ? styles.dotActive : ''}`}
+                onClick={() => setCurrentSlide(idx)}
+              ></div>
+            ))}
           </div>
-          <div className={styles.heroImage}>{hero.icon}</div>
         </div>
 
         {/* Smartphone Section */}
         <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Grab the best deal on <span>Smartphones</span></h2>
+          <h2 className={styles.sectionTitle}>Top Deals on <span>Smartphones</span></h2>
           <a href="#" className={styles.viewAll}>View All →</a>
         </div>
 
@@ -122,60 +123,81 @@ const Home = () => {
               <div className={styles.productImage}>{product.icon}</div>
               <div className={styles.productName}>{product.name}</div>
               <div className={styles.productPrices}>
-                <span style={{fontSize: '18px', fontWeight: '700'}}>₹{product.price}</span>
-                <span style={{fontSize: '14px', color: '#999', textDecoration: 'line-through', marginLeft: '10px'}}>₹{product.original}</span>
+                <span>₹{product.price}</span>
+                <span>₹{product.original}</span>
               </div>
-              <div style={{fontSize: '13px', color: '#22c55e', fontWeight: '600'}}>Save - ₹{product.save}</div>
+              <div className={styles.saveInfo}>Save ₹{product.save}</div>
             </div>
           ))}
         </div>
 
         {/* Top Categories */}
-        <div className={styles.sectionHeader} style={{marginTop: '50px'}}>
-          <h2 className={styles.sectionTitle}>Shop From <span>Top Categories</span></h2>
+        <div className={styles.sectionHeader} style={{marginTop: '60px'}}>
+          <h2 className={styles.sectionTitle}>Shop by <span>Category</span></h2>
+          <a href="#" className={styles.viewAll}>View All →</a>
         </div>
         <div className={styles.categoryGrid}>
-          {['Mobile', 'Cosmetics', 'Electronics', 'Furniture', 'Watches', 'Decor', 'Accessories'].map((cat, i) => (
+          {[
+            {name: 'Mobile', icon: '📱'},
+            {name: 'Cosmetics', icon: '💄'},
+            {name: 'Electronics', icon: '💻'},
+            {name: 'Furniture', icon: '🛋️'},
+            {name: 'Watches', icon: '⌚'},
+            {name: 'Decor', icon: '🌸'},
+            {name: 'Audio', icon: '🎧'},
+            {name: 'Gaming', icon: '🎮'}
+          ].map((item, i) => (
              <div key={i} className={styles.categoryCard} onClick={addToCart}>
-               <div className={styles.categoryIcon}>{[ '📱', '💄', '💻', '🛋️', '⌚', '🌸', '🎧'][i]}</div>
-               <div className={styles.categoryName}>{cat}</div>
+               <div className={styles.categoryIcon}>{item.icon}</div>
+               <div className={styles.categoryName}>{item.name}</div>
              </div>
           ))}
         </div>
 
-        {/* Brands Section */}
+        {/* Featured Brands */}
         <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Top <span>Electronics Brands</span></h2>
+          <h2 className={styles.sectionTitle}>Featured <span>Brands</span></h2>
+          <a href="#" className={styles.viewAll}>View All →</a>
         </div>
         <div className={styles.brandsGrid}>
-          <div className={styles.brandCard} onClick={addToCart}>
-            <div style={{fontSize: '12px', fontWeight: '600', opacity: 0.8}}>IPHONE</div>
-            <div style={{fontSize: '72px', marginBottom: '15px'}}>🍎</div>
-            <div>UP to 80% OFF</div>
-            <div className={styles.brandImage} style={{position: 'absolute', right: '20px', bottom: '20px', fontSize: '100px', opacity: 0.3}}>📱</div>
+          <div className={`${styles.brandCard} ${styles.apple}`} onClick={addToCart}>
+            <div className={styles.brandInfo}>AUTHORIZED RESELLER</div>
+            <div className={styles.brandTitle}>APPLE</div>
+            <div className={styles.brandDiscount}>Up to 20% OFF</div>
+            <div className={styles.brandImageBg}>🍎</div>
           </div>
-          <div className={`${styles.brandCard} ${styles.yellow}`} onClick={addToCart}>
-            <div style={{fontSize: '12px', fontWeight: '600', opacity: 0.8}}>REALME</div>
-            <div style={{fontSize: '72px', marginBottom: '15px'}}>🔶</div>
-            <div>UP to 80% OFF</div>
-            <div className={styles.brandImage} style={{position: 'absolute', right: '20px', bottom: '20px', fontSize: '100px', opacity: 0.3}}>📱</div>
+          
+          <div className={`${styles.brandCard} ${styles.samsung}`} onClick={addToCart}>
+            <div className={styles.brandInfo}>OFFICIAL STORE</div>
+            <div className={styles.brandTitle}>SAMSUNG</div>
+            <div className={styles.brandDiscount}>Up to 40% OFF</div>
+            <div className={styles.brandImageBg}>📱</div>
           </div>
-          {/* Add more brands as needed */}
+
+          <div className={`${styles.brandCard} ${styles.xiaomi}`} onClick={addToCart}>
+            <div className={styles.brandInfo}>FLASH SALE</div>
+            <div className={styles.brandTitle}>XIAOMI</div>
+            <div className={styles.brandDiscount}>Up to 50% OFF</div>
+            <div className={styles.brandImageBg}>⚡</div>
+          </div>
         </div>
 
         {/* Daily Essentials */}
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Daily <span>Essentials</span></h2>
+          <a href="#" className={styles.viewAll}>View All →</a>
         </div>
         <div className={styles.essentialsGrid}>
           {[
-            {name: 'Daily Essentials', icon: '🧺'}, {name: 'Vegetables', icon: '🥬'}, 
-            {name: 'Fruits', icon: '🍎'}, {name: 'Strawberry', icon: '🍓'}
+            {name: 'Daily Groceries', icon: '🧺'}, 
+            {name: 'Fresh Vegetables', icon: '🥬'}, 
+            {name: 'Organic Fruits', icon: '🍎'}, 
+            {name: 'Seasonal', icon: '🍓'}
           ].map((item, i) => (
             <div key={i} className={styles.essentialCard} onClick={addToCart}>
               <div className={styles.essentialImage}>{item.icon}</div>
-              <div style={{fontSize: '13px', color: '#666'}}>{item.name}</div>
-              <div style={{fontWeight: '700'}}>UP to 50% OFF</div>
+              <div className={styles.essentialName}>{item.name}</div>
+              <div className={styles.essentialDiscount}>Up to 50% OFF</div>
             </div>
           ))}
         </div>

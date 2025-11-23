@@ -1,5 +1,5 @@
 /* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
@@ -9,8 +9,14 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #1a1a1a;
-  background: #f8f9fa;
+  color: #2c3e50; /* Dark charcoal for main text */
+  background: #ecf0f1; /* Light grey background */
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #34495e; /* Default link color */
 }
 
 /* Animation for the toast notification */

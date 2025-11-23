@@ -3,7 +3,7 @@ import styles from './Navbar.module.css';
 
 const Navbar = ({ cartCount }) => {
   const categories = [
-    "Groceries", "Premium Fruits", "Home & Kitchen", "Fashion", 
+    "Groceries", "Premium Fruits", "Home & Kitchen", "Fashion",
     "Electronics", "Beauty", "Home Improvement", "Sports, Toys & Luggage"
   ];
 
@@ -40,18 +40,18 @@ const Navbar = ({ cartCount }) => {
         </div>
       </header>
 
-      <nav className={styles.nav}>
+      {/* <nav className={styles.nav}>
         <div className={styles.navContent}>
           {categories.map((cat, index) => (
-            <button 
-              key={index} 
+            <button
+              key={index}
               className={`${styles.navItem} ${index === 0 ? styles.active : ''}`}
             >
               {cat}
             </button>
           ))}
         </div>
-      </nav>
+      </nav> */}
     </>
   );
 };

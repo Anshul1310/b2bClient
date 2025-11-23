@@ -1,8 +1,9 @@
 .topBar {
-  background: white;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 10px 0;
-  font-size: 14px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 8px 0;
+  font-size: 13px;
+  color: #7f8c8d; /* Grey for top bar items */
 }
 
 .topBarContent {
@@ -13,20 +14,19 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 10px;
 }
 
 .topBarItem {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #666;
+  gap: 6px;
 }
 
 .header {
   background: white;
-  padding: 20px 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 18px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Softer shadow */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -39,16 +39,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
-  color: #0D6EFD;
+  color: #34495e; /* Primary dark blue */
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
 }
 
@@ -60,58 +60,66 @@
 
 .searchBar input {
   width: 100%;
-  padding: 12px 20px 12px 45px;
-  border: 2px solid #e5e5e5;
-  border-radius: 8px;
+  padding: 10px 18px 10px 40px; /* Adjust padding for icon */
+  border: 1px solid #ccc; /* Lighter border */
+  border-radius: 6px;
   font-size: 14px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .searchBar input:focus {
   outline: none;
-  border-color: #0D6EFD;
+  border-color: #5DADE2; /* Accent blue on focus */
+  box-shadow: 0 0 0 3px rgba(93, 173, 226, 0.2); /* Subtle glow */
 }
 
 .searchBar::before {
-  content: "🔍";
+  content: "🔍"; /* Search icon */
   position: absolute;
-  left: 15px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 16px;
+  color: #7f8c8d;
 }
 
 .headerActions {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
 }
 
 .headerBtn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: none;
   border: none;
   font-size: 14px;
   cursor: pointer;
-  color: #333;
+  color: #2c3e50; /* Dark charcoal */
   font-weight: 500;
+  transition: color 0.3s;
+}
+
+.headerBtn:hover {
+  color: #34495e; /* Primary dark blue on hover */
 }
 
 .cartBadge {
-  background: #0D6EFD;
+  background: #5DADE2; /* Accent blue */
   color: white;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 
 .nav {
-  background: white;
-  border-top: 1px solid #e5e5e5;
-  padding: 15px 0;
+  background: #fdfdfd;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 0;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.03); /* Very light shadow */
 }
 
 .navContent {
@@ -119,33 +127,49 @@
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  gap: 5px;
+  gap: 8px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.navContent::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, Opera */
 }
 
 .navItem {
-  padding: 8px 20px;
-  background: none;
-  border: none;
-  border-radius: 25px;
-  font-size: 14px;
+  padding: 8px 18px;
+  background: #f7f7f7; /* Light background for items */
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  font-size: 13px;
   cursor: pointer;
   white-space: nowrap;
-  color: #333;
+  color: #34495e; /* Primary dark blue */
   font-weight: 500;
   transition: all 0.3s;
 }
 
 .navItem:hover {
-  background: #f0f0f0;
+  background: #e9ecef; /* Slightly darker on hover */
+  border-color: #d0d0d0;
 }
 
 .active {
-  background: #0D6EFD;
+  background: #34495e; /* Primary dark blue for active */
   color: white;
+  border-color: #34495e;
 }
 
 @media (max-width: 768px) {
-  .headerContent { flex-wrap: wrap; }
-  .searchBar { order: 3; max-width: 100%; flex-basis: 100%; }
+  .headerContent { flex-wrap: wrap; justify-content: center; }
+  .searchBar { order: 3; max-width: 100%; flex-basis: 100%; margin-top: 15px; }
+  .logo, .headerActions { flex-grow: 1; justify-content: center; }
+  .headerActions { gap: 15px; }
+}
+
+@media (max-width: 480px) {
+  .headerBtn { font-size: 13px; }
+  .logo { font-size: 24px; }
+  .topBarContent { justify-content: center; }
 }

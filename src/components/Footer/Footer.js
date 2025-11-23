@@ -14,7 +14,7 @@ const Footer = () => {
           </div>
           <div className={styles.appButtons}>
             <a href="#" className={styles.appBtn}>📱 App Store</a>
-            <a href="#" className={styles.appBtn}>📱 Google Play</a>
+            <a href="#" className={styles.appBtn}>▶ Google Play</a>
           </div>
         </div>
 
