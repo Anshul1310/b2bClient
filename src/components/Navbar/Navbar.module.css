@@ -173,3 +173,43 @@
   .logo { font-size: 24px; }
   .topBarContent { justify-content: center; }
 }
+
+@media (max-width: 768px) {
+  .topBarContent {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .headerContent {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 10px;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .headerActions {
+    order: 2;
+    gap: 15px;
+  }
+
+  .searchBar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+  
+  .navContent {
+    padding-bottom: 5px;
+  }
+  
+  /* Hide "Cart" text on very small screens, keep icon */
+  @media (max-width: 400px) {
+    .headerBtn span:nth-child(2) {
+      display: none;
+    }
+  }
+}

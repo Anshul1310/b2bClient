@@ -86,7 +86,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar cartCount={cartCount} />
+     
       
       {showNotification && <div className={styles.notification}>Item added to cart!</div>}
 

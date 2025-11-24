@@ -1,11 +1,24 @@
-import React from 'react';
+// src/components/Navbar/Navbar.js
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 const Navbar = ({ cartCount }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
   const categories = [
-    "Groceries", "Premium Fruits", "Home & Kitchen", "Fashion",
+    "Groceries", "Premium Fruits", "Home & Kitchen", "Fashion", 
     "Electronics", "Beauty", "Home Improvement", "Sports, Toys & Luggage"
   ];
+
+  // Handle Enter Key Press
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' && searchTerm.trim().length > 0) {
+      // Navigate to /shop with query param
+      navigate(`/shop?q=${encodeURIComponent(searchTerm)}`);
+    }
+  };
 
   return (
     <>
@@ -19,39 +32,50 @@ const Navbar = ({ cartCount }) => {
 
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <div className={styles.logo}>
-            <span>☰</span>
-            <span>MegaMart</span>
-          </div>
+          <Link to="/" style={{textDecoration: 'none'}}>
+            <div className={styles.logo}>
+              <span>☰</span>
+              <span>MegaMart</span>
+            </div>
+          </Link>
+          
           <div className={styles.searchBar}>
-            <input type="text" placeholder="Search essentials, groceries and more..." />
+            <input 
+              type="text" 
+              placeholder="Search essentials, groceries and more..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleSearch}
+            />
           </div>
+          
           <div className={styles.headerActions}>
-            <button className={styles.headerBtn}>
+            <Link to="/login" className={styles.headerBtn} style={{textDecoration: 'none'}}>
               <span>👤</span>
               <span>Sign Up/Sign In</span>
-            </button>
-            <button className={styles.headerBtn}>
+            </Link>
+            
+            <Link to="/cart" className={styles.headerBtn} style={{textDecoration: 'none'}}>
               <span>🛒</span>
               <span>Cart</span>
               <span className={styles.cartBadge}>{cartCount}</span>
-            </button>
+            </Link>
           </div>
         </div>
       </header>
 
-      {/* <nav className={styles.nav}>
+      <nav className={styles.nav}>
         <div className={styles.navContent}>
           {categories.map((cat, index) => (
-            <button
-              key={index}
+            <button 
+              key={index} 
               className={`${styles.navItem} ${index === 0 ? styles.active : ''}`}
             >
               {cat}
             </button>
           ))}
         </div>
-      </nav> */}
+      </nav>
     </>
   );
 };
