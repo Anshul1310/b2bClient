@@ -114,6 +114,35 @@ const Login = () => {
               <button type="submit" className={styles['submit-btn']}>
                 Sign In
               </button>
+
+              {/* Skip Button added below */}
+              <button 
+                type="button" 
+                onClick={() => navigate('/')}
+                style={{
+                  marginTop: '15px',
+                  width: '100%',
+                  padding: '14px',
+                  background: 'transparent',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '12px',
+                  color: '#666',
+                  fontSize: '15px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#f8f9fa';
+                  e.currentTarget.style.borderColor = '#d0d0d0';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.borderColor = '#e0e0e0';
+                }}
+              >
+                Skip Login
+              </button>
             </form>
           ) : (
             <form onSubmit={handleOtpSubmit}>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Home.module.css';
 import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
-
-
+// Footer is in MainLayout
 
 const Home = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -11,12 +9,12 @@ const Home = () => {
   const [showNotification, setShowNotification] = useState(false);
   const scrollRef = useRef(null);
 
-  // Data for Hero Slider (Images only - Banner style)
+  // Data for Hero Slider
   const heroContents = [
-    'https://images.unsplash.com/photo-1556656793-02774a8316ea?auto=format&fit=crop&w=1600&q=80', // Shopping/Apparel
-    'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1600&q=80', // Tech/Electronics
-    'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80', // E-commerce boxes
-    'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80', // Fashion/Mall
+    'https://images.unsplash.com/photo-1556656793-02774a8316ea?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80',
   ];
 
   // Data for Products
@@ -46,13 +44,15 @@ const Home = () => {
 
     const onMouseDown = (e) => {
       isDown = true;
-      slider.style.cursor = 'grabbing';
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
+      if (slider) {
+        slider.style.cursor = 'grabbing';
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      }
     };
 
-    const onMouseLeave = () => { isDown = false; slider.style.cursor = 'grab'; };
-    const onMouseUp = () => { isDown = false; slider.style.cursor = 'grab'; };
+    const onMouseLeave = () => { isDown = false; if (slider) slider.style.cursor = 'grab'; };
+    const onMouseUp = () => { isDown = false; if (slider) slider.style.cursor = 'grab'; };
     const onMouseMove = (e) => {
       if (!isDown) return;
       e.preventDefault();
@@ -86,19 +86,16 @@ const Home = () => {
 
   return (
     <>
-     
-      
       {showNotification && <div className={styles.notification}>Item added to cart!</div>}
 
       <div className={styles.container}>
-        {/* Hero Slider (Image Only + Black Tint) */}
+        {/* Hero Slider */}
         <div className={styles.heroSlider}>
           <img 
             src={heroContents[currentSlide]} 
             alt="Special Offer" 
             className={styles.heroImg}
           />
-          
           <div className={styles.sliderDots}>
             {heroContents.map((_, idx) => (
               <div 
@@ -110,29 +107,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Smartphone Section */}
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Top Deals on <span>Smartphones</span></h2>
-          <a href="#" className={styles.viewAll}>View All →</a>
-        </div>
-
-        <div className={styles.productsScroll} ref={scrollRef}>
-          {products.map((product, index) => (
-            <div key={index} className={styles.productCard} onClick={addToCart}>
-              <div className={styles.discountBadge}>{product.discount} OFF</div>
-              <div className={styles.productImage}>{product.icon}</div>
-              <div className={styles.productName}>{product.name}</div>
-              <div className={styles.productPrices}>
-                <span>₹{product.price}</span>
-                <span>₹{product.original}</span>
-              </div>
-              <div className={styles.saveInfo}>Save ₹{product.save}</div>
-            </div>
-          ))}
-        </div>
-
         {/* Top Categories */}
-        <div className={styles.sectionHeader} style={{marginTop: '60px'}}>
+        <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Shop by <span>Category</span></h2>
           <a href="#" className={styles.viewAll}>View All →</a>
         </div>
@@ -154,56 +130,48 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Featured Brands */}
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Featured <span>Brands</span></h2>
+        {/* Smartphone Section (Sliding) */}
+        <div className={styles.sectionHeader} style={{marginTop: '60px'}}>
+          <h2 className={styles.sectionTitle}>Top Deals on <span>Smartphones</span></h2>
           <a href="#" className={styles.viewAll}>View All →</a>
         </div>
-        <div className={styles.brandsGrid}>
-          <div className={`${styles.brandCard} ${styles.apple}`} onClick={addToCart}>
-            <div className={styles.brandInfo}>AUTHORIZED RESELLER</div>
-            <div className={styles.brandTitle}>APPLE</div>
-            <div className={styles.brandDiscount}>Up to 20% OFF</div>
-            <div className={styles.brandImageBg}>🍎</div>
-          </div>
-          
-          <div className={`${styles.brandCard} ${styles.samsung}`} onClick={addToCart}>
-            <div className={styles.brandInfo}>OFFICIAL STORE</div>
-            <div className={styles.brandTitle}>SAMSUNG</div>
-            <div className={styles.brandDiscount}>Up to 40% OFF</div>
-            <div className={styles.brandImageBg}>📱</div>
-          </div>
-
-          <div className={`${styles.brandCard} ${styles.xiaomi}`} onClick={addToCart}>
-            <div className={styles.brandInfo}>FLASH SALE</div>
-            <div className={styles.brandTitle}>XIAOMI</div>
-            <div className={styles.brandDiscount}>Up to 50% OFF</div>
-            <div className={styles.brandImageBg}>⚡</div>
-          </div>
-        </div>
-
-        {/* Daily Essentials */}
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Daily <span>Essentials</span></h2>
-          <a href="#" className={styles.viewAll}>View All →</a>
-        </div>
-        <div className={styles.essentialsGrid}>
-          {[
-            {name: 'Daily Groceries', icon: '🧺'}, 
-            {name: 'Fresh Vegetables', icon: '🥬'}, 
-            {name: 'Organic Fruits', icon: '🍎'}, 
-            {name: 'Seasonal', icon: '🍓'}
-          ].map((item, i) => (
-            <div key={i} className={styles.essentialCard} onClick={addToCart}>
-              <div className={styles.essentialImage}>{item.icon}</div>
-              <div className={styles.essentialName}>{item.name}</div>
-              <div className={styles.essentialDiscount}>Up to 50% OFF</div>
+        <div className={styles.productsScroll} ref={scrollRef}>
+          {products.map((product, index) => (
+            <div key={index} className={styles.productCard} onClick={addToCart}>
+              <div className={styles.discountBadge}>{product.discount} OFF</div>
+              <div className={styles.productImage}>{product.icon}</div>
+              <div className={styles.productName}>{product.name}</div>
+              <div className={styles.productPrices}>
+                <span>₹{product.price}</span>
+                <span>₹{product.original}</span>
+              </div>
+              <div className={styles.saveInfo}>Save ₹{product.save}</div>
             </div>
           ))}
         </div>
-      </div>
 
-      <Footer />
+        {/* NEW SECTION: Best Selling Products (Grid/Rows) */}
+        <div className={styles.sectionHeader} style={{marginTop: '60px'}}>
+          <h2 className={styles.sectionTitle}>Best Selling <span>Products</span></h2>
+          <a href="#" className={styles.viewAll}>View All →</a>
+        </div>
+        <div className={styles.productsGrid}>
+          {/* Duplicating products to ensure enough items for rows */}
+          {[...products, ...products].slice(0, 10).map((product, index) => (
+            <div key={index} className={styles.productCard} onClick={addToCart}>
+              <div className={styles.discountBadge}>{product.discount} OFF</div>
+              <div className={styles.productImage}>{product.icon}</div>
+              <div className={styles.productName}>{product.name}</div>
+              <div className={styles.productPrices}>
+                <span>₹{product.price}</span>
+                <span>₹{product.original}</span>
+              </div>
+              <div className={styles.saveInfo}>Save ₹{product.save}</div>
+            </div>
+          ))}
+        </div>
+
+      </div>
     </>
   );
 };

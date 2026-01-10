@@ -37,6 +37,7 @@ function App() {
             <Route path="/shop" element={<ProductList />} />
             <Route path="/orders" element={<OrderList />} /> {/* New Route */}
             <Route path="/order" element={<OrderDetails />} />
+            <Route path="/products" element={<ProductList />} />
           </Route>
 
           {/* Standalone Routes */}

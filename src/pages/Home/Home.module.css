@@ -1,22 +1,23 @@
+/* src/pages/Home/Home.module.css */
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 30px 20px;
 }
 
-/* --- Hero Section (Full Image Carousel) --- */
+/* --- Hero Section --- */
 .heroSlider {
   width: 100%;
-  height: 360px; /* Reduced height as requested */
+  height: 360px;
   border-radius: 12px;
   position: relative;
   overflow: hidden;
   margin-bottom: 50px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  background: #2c3e50; /* Dark background behind image */
+  background: #2c3e50;
 }
 
-/* The Black Tint Overlay */
 .heroSlider::after {
   content: "";
   position: absolute;
@@ -24,8 +25,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.35); /* 35% Black Tint */
-  z-index: 1; /* Sits above image, below dots */
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -38,7 +39,6 @@
   z-index: 0;
 }
 
-/* Dots positioned on top of the image at the bottom */
 .sliderDots {
   position: absolute;
   bottom: 20px;
@@ -46,9 +46,9 @@
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
-  z-index: 10; /* Ensure dots are above the black tint */
+  z-index: 10;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.1); /* Lighter glass effect */
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -86,7 +86,7 @@
 }
 .viewAll:hover { color: #34495e; }
 
-/* --- Products Scroll --- */
+/* --- Products Scroll (Sliding) --- */
 .productsScroll {
   display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;
   scroll-behavior: smooth; cursor: grab;
@@ -99,13 +99,21 @@
 .productsScroll::-webkit-scrollbar-track { background: #ecf0f1; border-radius: 10px; }
 .productsScroll::-webkit-scrollbar-thumb { background: #5DADE2; border-radius: 10px; }
 
+/* --- Products Grid (Rows) --- */
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
 /* --- Generic Card Styles --- */
-.productCard, .categoryCard, .essentialCard {
+.productCard, .categoryCard {
   background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; position: relative;
   overflow: hidden;
 }
-.productCard:hover, .categoryCard:hover, .essentialCard:hover {
+.productCard:hover, .categoryCard:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
@@ -175,20 +183,6 @@
   color: white; pointer-events: none;
 }
 
-/* --- Essentials Grid --- */
-.essentialsGrid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-bottom: 50px;
-}
-.essentialCard { padding: 18px; text-align: center; }
-.essentialImage {
-  width: 100%; height: 120px; background: #fdfdfd; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 45px; margin-bottom: 12px;
-  border: 1px dashed #e0e0e0; color: #aeb6bf;
-}
-.essentialName { font-size: 13px; color: #7f8c8d; margin-bottom: 5px; }
-.essentialDiscount { font-weight: 700; color: #34495e; font-size: 15px; }
-
 /* --- Notification --- */
 .notification {
   position: fixed; top: 100px; right: 20px; background: #2ecc71;
@@ -199,8 +193,9 @@
 
 /* --- Responsive Queries --- */
 @media (max-width: 768px) {
-  .heroSlider { height: 220px; } /* Smaller height for mobile */
+  .heroSlider { height: 220px; }
   .brandsGrid { grid-template-columns: 1fr; }
   .brandCard { padding: 30px; text-align: center; }
   .brandImageBg { right: 50%; transform: translateX(50%); bottom: 10px; }
+  .productsGrid { grid-template-columns: 1fr; } 
 }
